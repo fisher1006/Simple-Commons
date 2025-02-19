@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#FFF57C00</color>
-    <color name="color_primary_dark">#FFD76D00</color>
+    <color name="color_primary">#41BA41</color>
+    <color name="color_primary_dark">#41BA41</color>
     <color name="color_accent">@color/color_primary</color>
 
     <color name="pressed_item_foreground">#08000000</color>
@@ -50,7 +50,7 @@
     <color name="md_cyan">#00BCD4</color>
     <color name="md_deep_orange">#FF5722</color>
     <color name="md_deep_purple">#673AB7</color>
-    <color name="md_green">#4CAF50</color>
+    <color name="md_green">#41BA41</color>
     <color name="md_grey">#9E9E9E</color>
     <color name="md_indigo">#3F51B5</color>
     <color name="md_light_blue">#03A9F4</color>
