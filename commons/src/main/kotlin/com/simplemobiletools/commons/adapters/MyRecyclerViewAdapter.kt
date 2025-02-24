@@ -159,7 +159,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
         }
     }
 
-    fun itemLongClicked(position: Int) {
+    open fun itemLongClicked(position: Int) {
         recyclerView.setDragSelectActive(position)
         lastLongPressedItem = if (lastLongPressedItem == -1) {
             position
@@ -341,7 +341,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
             lastLongPressedItem = -1
         }
 
-        fun viewLongClicked() {
+        open fun viewLongClicked() {
             val currentPosition = adapterPosition - positionOffset
             if (!actModeCallback.isSelectable) {
                 activity.startActionMode(actModeCallback)
