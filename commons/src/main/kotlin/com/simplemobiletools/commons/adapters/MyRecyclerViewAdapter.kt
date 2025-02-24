@@ -159,7 +159,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
         }
     }
 
-    open fun itemLongClicked(position: Int) {
+    open fun itemLongClicked(itemView: View, position: Int) {
         recyclerView.setDragSelectActive(position)
         lastLongPressedItem = if (lastLongPressedItem == -1) {
             position
@@ -315,6 +315,16 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
         finishActMode()
     }
 
+    open fun viewLongClicked(itemView: View) {
+        val currentPosition = adapterPosition - positionOffset
+        if (!actModeCallback.isSelectable) {
+            activity.startActionMode(actModeCallback)
+        }
+
+        toggleItemSelection(true, currentPosition, true)
+        itemLongClicked(itemView, currentPosition)
+    }
+
     open inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bindView(any: Any, allowSingleClick: Boolean, allowLongClick: Boolean, callback: (itemView: View, adapterPosition: Int) -> Unit): View {
             return itemView.apply {
@@ -322,7 +332,7 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
 
                 if (allowSingleClick) {
                     setOnClickListener { viewClicked(any) }
-                    setOnLongClickListener { if (allowLongClick) viewLongClicked() else viewClicked(any); true }
+                    setOnLongClickListener { if (allowLongClick) viewLongClicked(itemView) else viewClicked(any); true }
                 } else {
                     setOnClickListener(null)
                     setOnLongClickListener(null)
@@ -341,14 +351,5 @@ abstract class MyRecyclerViewAdapter(val activity: BaseSimpleActivity, val recyc
             lastLongPressedItem = -1
         }
 
-        open fun viewLongClicked() {
-            val currentPosition = adapterPosition - positionOffset
-            if (!actModeCallback.isSelectable) {
-                activity.startActionMode(actModeCallback)
-            }
-
-            toggleItemSelection(true, currentPosition, true)
-            itemLongClicked(currentPosition)
-        }
     }
 }
